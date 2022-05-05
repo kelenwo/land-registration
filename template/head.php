@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>{title}</title> 
+	<title>{title}</title>
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo base_url();?>template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -57,21 +57,21 @@
 					</li>
 					<hr class="sidebar-divider">
 					<li class="nav-item">
-						<a class="nav-link collapsed" href="<?php echo base_url();?>property/manage" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Manage your Property</span> </a>
+						<a class="nav-link collapsed" href="<?php echo base_url();?>property/manage" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-suitcase"></i> <span>Manage your Property</span> </a>
 					</li>
 					<hr class="sidebar-divider">
 					<li class="nav-item">
-						<a class="nav-link collapsed" href="<?php echo base_url('property/sell');?>" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Sell Property</span> </a>
+						<a class="nav-link collapsed" href="<?php echo base_url('property/sell');?>" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-store-alt"></i> <span>Sell Property</span> </a>
 					</li>
 					<hr class="sidebar-divider">
 					<li class="nav-item">
-						<a class="nav-link collapsed" href="<?php echo base_url('home/properties');?>" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Buy a Property</span> </a>
+						<a class="nav-link collapsed" href="<?php echo base_url('home/properties');?>" aria-expanded="true" aria-controls="collapseTwo"> <i class="fas fa-fw fa-shopping-cart"></i> <span>Buy a Property</span> </a>
 					</li>
 					<!-- Divider-->
 					<hr class="sidebar-divider">
 					<!-- Nav Item - Pages Collapse Menu-->
 					<li class="nav-item">
-						<a class="nav-link collapsed <?php if($this->uri->segment(1)==" bidding "){echo "active ";}?>" href="#" data-toggle="collapse" data-target="#contractbidding-tab" aria-expanded="true" aria-controls="collapsePages"> <i class="far fa-fw fa-badge-check"></i> <span>Listed Properties</span> </a>
+						<a class="nav-link collapsed <?php if($this->uri->segment(1)==" bidding "){echo "active ";}?>" href="#" data-toggle="collapse" data-target="#contractbidding-tab" aria-expanded="true" aria-controls="collapsePages"> <i class="far fa-fw fa-list-alt"></i> <span>Listed Properties</span> </a>
 						<div id="contractbidding-tab" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 							<div class="bg-transparent py-2 collapse-inner rounded">
 								<h6 class="collapse-header">Listed Properties:</h6>
