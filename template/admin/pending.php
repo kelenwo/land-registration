@@ -1,12 +1,8 @@
-<script src="<?php echo base_url();?>template/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>template/assets/js/demo/datatables-demo.js"></script>
-
 <div class="col-xs-12 col-sm-9 content">
   <div class="panel panel-default">
 <div class="panel-heading">
   <h3 class="panel-title"><a href="javascript:void(0);" class="toggle-sidebar">
-    <span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>Bids</h3>
+    <span class="fa fa-angle-double-left" data-toggle="offcanvas" title="Maximize Panel"></span></a>Approved Properties</h3>
 </div>
    <div class="panel-body">
 <div class="content-row">
@@ -24,7 +20,7 @@
   <div class="">
  <div class="tab-contents">
   <ul id="myTab1" class="nav nav-tabs nav-justified">
- <li class="active"><a class="" href="#tab1" data-toggle="tab">Contract Bids</a></li>
+ <li class="active"><a class="" href="#tab1" data-toggle="tab">Approved Properties</a></li>
    </ul>
   <div id="myTabContent" class="tab-content">
 
@@ -32,31 +28,37 @@
  <div class="tab-pane fade  active in" id="tab1">
  <div class="col-md-12">
   <div class="panel">
-  <table class="table table-bordered table-hover table-responsive custom-tbl" id="dataTable">
+  <table class="table table-hover table-responsive custom-tbl">
 <thead>
 <tr>
   <th>#</th>
-  <th>Contract Title</th>
-  <th>Bidder</th>
-  <th>Bidder Email</th>
-  <th>Contract number</th>
-  <th>Bid Amount</th>
-  <th>Bid Status</th>
-</tr>
-</thead>
+  <th>Title</th>
+  <th>Location</th>
+  <th>Price</th>
+  <th>Status</th>
+  <th>Date</th>
+  <th>Actions</th>
+  </tr>
+  </thead>
   <tbody>
-<?php if($bids==false): ?>
+  <?php if($bids==false): ?>
   <tr><td colspan="7"><h4 class="text-center">NO DATA TO DISPLAY</h4></td></tr>
-<?php else: $i = 1;?>
-<?php  foreach($bids as $req): ?>
-<tr>
-<td><?php echo $i++.'.';?>
-<td> <a href="#viewcontract-<?php echo $req['id'];?>" data-toggle="modal"><?php echo $req['contract_title']; ?></a></td>
-<td><?php echo $req['bid_by']; ?></td>
-<td><?php echo $req['bid_by_email']; ?></td>
-<td><?php echo $req['bid_number']; ?></td>
-  <td><?php echo $req['bid_amount']; ?></td>
-  <td><?php echo $req['bid_status']; ?></td>
+  <?php else: $i = 1;?>
+  <?php  foreach($bids as $req): ?>
+  <tr>
+  <td><?php echo $i++.'.';?>
+  <td> <a href="#viewcontract-<?php echo $req['id'];?>" data-toggle="modal"><?php echo $req['title']; ?></a></td>
+  <td><?php echo $req['location']; ?></td>
+  <td><?php echo $req['price']; ?></td>
+  <td><?php echo $req['auth']; ?></td>
+  <td><?php echo $req['date']; ?></td>
+  <td class="actions">
+    <a id="del-user-<?php echo $req['id'];?>"><b style="color:red;">Delete&nbsp;<i class="fas fa-trash-alt"></i></a></b>
+    <form id="del_users-<?php echo $req['id'];?>">
+    <input type="hidden" name="id" value="<?php echo $req['id'];?>">
+    <input type="hidden" name="type" value="users">
+  </form>
+  </td>
 </tr>
 <!-- List contract modal -->
 <div class="modal fade" id="viewcontract-<?php echo $req['id'];?>" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,45 +85,31 @@
 <div class="card-body" style="margin: -5px!important;">
 <div class="row">
   <div class="col-sm-6 col-md-6 mt-3">
-<div class="text-sm text-primary ml-3 text-capitalize"><small class="text-success">Contract Title:</small>
-<h6><?php echo $req['contract_title'];?></h6></div>
-
+<div class="text-sm text-primary ml-3 text-capitalize"><small class="text-success">Title:</small>
+<h6><?php echo $req['title'];?></h6></div>
           <div class="ml-3">
-          <div class="text-sm text-primary text-capitalize"><small class="text-success">Category:</small>
-        <h6><?php echo $req['category'];?></h6></div>
+          <div class="text-sm text-primary text-capitalize"><small class="text-success">Location:</small>
+        <h6><?php echo $req['location'];?></h6></div>
 
-      <div class="text-sm text-primary text-capitalize"><small class="text-success">Bidder:</small>
-    <h6><?php echo $req['bid_by'];?></h6></div>
-    <?php if($req['bid_status']=="pending"): ?>
-              <div class="text-sm text-primary text-capitalize"><small class="text-success">Billing Cycle:</small>
-              <br><br>
-              <form id="update_contract_<?php echo $req['id'];?>">
-                <input type="hidden" name="id" value="<?php echo $req['id'];?>">
-                <input type="hidden" name="bid_by_email" value="<?php echo $req['bid_by_email'];?>">
-                <input type="hidden" name="bid_status" value="authorized">
-                <input type="hidden" name="contract_status" value="pending">
-                <input type="hidden" name="approval_date" value="<?php echo date("d F, Y");?>">
-            <select name="billing_cycle" class="form-control bg-light">
-              <option value="One Time">One Time</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Quaterly">Quaterly</option>
-              <option value="Yearly">Yearly</option>
-            </select>  </form>
-          </div>
-            <?php endif;?>
-      </div></div>
+      <div class="text-sm text-primary text-capitalize"><small class="text-success">Price:</small>
+    <h6><?php echo $req['price'];?></h6></div>
+    <div class="text-sm text-primary text-capitalize"><small class="text-success">Size:</small>
+  <h6><?php echo $req['size'];?> Plots</h6></div>
+</div>
+    </div>
+
         <div class="col-sm-5 col-md-5 ml-4 mt-3">
-          <div class="text-sm text-primary text-capitalize"><small class="text-success">Bid Amount:</small>
-        <h6><?php echo $req['bid_amount'];?></h6></div><br>
-        <div class="text-sm text-primary text-capitalize"><small class="text-success">Contract Number:</small>
-      <h6><?php echo $req['bid_number'];?></h6></div>
+          <div class="text-sm text-primary text-capitalize"><small class="text-success">Author:</small>
+        <h6><?php echo $req['author'];?></h6></div>
+        <div class="text-sm text-primary text-capitalize"><small class="text-success">Author Email:</small>
+      <h6><?php echo $req['author_email'];?></h6></div>
 
-      <div class="text-sm text-primary text-capitalize"><small class="text-success">Bidder Email:</small>
-    <h6><?php echo $req['bid_by_email'];?></h6></div>
+      <div class="text-sm text-primary text-capitalize"><small class="text-success">Date Added:</small>
+    <h6><?php echo $req['date'];?></h6></div>
 
-    <div class="text-sm text-primary text-capitalize"><small class="text-success">Bill of contract:</small>
-    <h6><?php echo $req['bill_of_contract'];?> <small><a href="<?php echo base_url();?>uploads/boc/<?php echo $req['bill_of_contract'];?>">View/Download</a></small></h6>
-  </div>
+      <div class="text-sm text-primary text-capitalize"><small class="text-success">Status:</small>
+    <h6><?php echo $req['auth'];?></h6>
+      </div>
         </div>
       </div>
     </div>
@@ -134,31 +122,24 @@
         <span style="color:green;" id="msg-<?php echo $req['id'];?>"></span>
         <span style="color:red;" id="msg2-<?php echo $req['id'];?>"></span>
         <div class="form-group text-center mt-5">
-  <?php if($req['bid_status'] !=="pending"): ?>
-          <button class="btn pl-5 pr-5 btn-success" id="unsave-<?php echo $req['id'];?>"><i class="far fa-edit"></i> Unauthorize Bid &nbsp;
-          <i id="loadingg-<?php echo $req['id'];?>" class="fas fa-cog fa-spin"></i></button>
-  <?php else: ?>
-    <button class="btn pl-5 pr-5 btn-success" id="save-<?php echo $req['id'];?>"><i class="far fa-edit"></i> Authorize Bid &nbsp;
+          <a href="" class="btn pl-3 pr-3 btn-info" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i> &nbsp;View Full Details</a>
+          <?php if($req['auth']=="pending"): ?>
+    <button class="btn pl-3 pr-3 btn-success" id="save-<?php echo $req['id'];?>" <?php if($req['auth']=="approved"){echo 'disabled';}?>><i class="far fa-edit"></i> Approve &nbsp;
     <i id="loading-<?php echo $req['id'];?>" class="fas fa-cog fa-spin"></i></button>
-  <?php endif;?>
-          <button class="btn pl-5 pr-5 btn-info" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i> &nbsp;Close</button>
+    <?php endif;?>
+          <button class="btn pl-3 pr-3 btn-info" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i> &nbsp;Close</button>
        </div>
       </div>
     </div>
   </div>
 </div>
-
-<form id="updat_contract_<?php echo $req['id'];?>">
-  <input type="hidden" name="id" value="<?php echo $req['id'];?>">
-  <input type="hidden" name="bid_by_email" value="<?php echo $req['bid_by_email'];?>">
-  <input type="hidden" name="bid_status" value="pending">
-  <input type="hidden" name="approval_date" value=" ">
-</form>
 <!--List Contract modal End -->
 <script>
 $(document).ready(function() {
 $("#loadingg-<?php echo $req['id'];?>").hide();
 $("#loading-<?php echo $req['id'];?>").hide();
+$("#loading--<?php echo $req['id'];?>").hide();
+$("#loading1-<?php echo $req['id'];?>").hide();
 //delete contract
 $('#loadingcontract-<?php echo $req["id"];?>').hide();
 $("#del-contract-<?php echo $req['id'];?>").click(function(){
@@ -185,13 +166,14 @@ $("#loading-<?php echo $req['id'];?>").show();
 $.ajax({
   url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
   type: "POST",
-  data: $("#update_contract_<?php echo $req['id'];?>").serialize(),
+  data: $("#update_contract-<?php echo $req['id'];?>").serialize(),
   success:function(data) {
 $('#msg2-<?php echo $req["id"];?>').html('');
 $('#msg-<?php echo $req["id"];?>').html('');
 $("#loading-<?php echo $req['id'];?>").hide();
   if(data=="true") {
-$("#msg-<?php echo $req['id'];?>").html('Contract has been Authorized Pending contractors approval');
+alert('Contract has been Approved successfully');
+window.location.href = "<?php echo $_SERVER['PHP_SELF'];?>";
 $("#save-<?php echo $req['id'];?>").attr('disabled','disabled');
   } else {
 $('#msg2-<?php echo $req["id"];?>').html(data);
@@ -199,6 +181,50 @@ $('#msg2-<?php echo $req["id"];?>').html(data);
   }
 });
 });
+
+//Save contract edit
+$("#save--<?php echo $req['id'];?>").click(function() {
+$("#loading--<?php echo $req['id'];?>").show();
+$.ajax({
+  url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
+  type: "POST",
+  data: $("#update__contract_<?php echo $req['id'];?>").serialize(),
+  success:function(data) {
+$('#msg2-<?php echo $req["id"];?>').html('');
+$('#msg-<?php echo $req["id"];?>').html('');
+$("#loading--<?php echo $req['id'];?>").hide();
+  if(data=="true") {
+alert('Contract has been Completed');
+$("#save--<?php echo $req['id'];?>").attr('disabled','disabled');
+  } else {
+$('#msg2-<?php echo $req["id"];?>').html(data);
+  }
+  }
+});
+});
+
+$("#save1-<?php echo $req['id'];?>").click(function() {
+$("#loading1-<?php echo $req['id'];?>").show();
+$.ajax({
+  url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
+  type: "POST",
+  data: $("#update_contract-<?php echo $req['id'];?>").serialize(),
+  success:function(data) {
+$('#msg2-<?php echo $req["id"];?>').html('');
+$('#msg-<?php echo $req["id"];?>').html('');
+$("#loading1-<?php echo $req['id'];?>").hide();
+  if(data=="true") {
+alert('Contract has been Approved successfully');
+window.location.href = "<?php echo $_SERVER['PHP_SELF'];?>";
+$("#save1-<?php echo $req['id'];?>").attr('disabled','disabled');
+  } else {
+$('#msg2-<?php echo $req["id"];?>').html(data);
+  }
+  }
+});
+});
+
+
 
 //Save contract edit
 $("#unsave-<?php echo $req['id'];?>").click(function() {

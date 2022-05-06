@@ -1,5 +1,5 @@
 <?php
-Class Contract_model Extends CI_model {
+Class Property_model Extends CI_model {
 
 
 
@@ -55,7 +55,7 @@ Class Contract_model Extends CI_model {
       return mysqli_error();
     }
   }
- 
+
   public function update_contract_where() {
     $this->db->set('status','completed');
     $this->db->where('contract_number',$this->input->post('bid_number'));
@@ -96,9 +96,19 @@ if($query->num_rows() < 0) {
 }
 }
 
-public function get_contracts_approved() {
-  $this->db->where('bid_status !=','pending');
-$query =  $this->db->get('bids');
+public function get_properties_approved() {
+  $this->db->where('auth !=','approved');
+$query =  $this->db->get('for_sell');
+if($query->num_rows() < 0) {
+  return false;
+} else {
+    return $query->result_array();
+}
+}
+
+public function get_properties_pending() {
+  $this->db->where('auth =','pending');
+$query =  $this->db->get('for_sell');
 if($query->num_rows() < 0) {
   return false;
 } else {

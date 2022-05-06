@@ -65,7 +65,7 @@
         </div><!-- /.container-fluid -->
       </nav>
     <!--header-->
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-left:3% !important">
     <!--documents-->
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="col-xs-6 col-sm-4 sidebar-offcanvas" role="navigation">
@@ -73,20 +73,16 @@
                   <li><a class="list-group-item" id="index-tab" href="<?php echo base_url();?>ucp/manage">
                   <i class="fa fa-home" ></i>
                 Dashboard </a></li>
-                <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/manage/approved_contracts"><i class="fa fa-folder-open"></i>
+                <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/approved_properties"><i class="fa fa-folder-open"></i>
               Approved<span class="badge badge-danger" style="display:none;" id="count"></span> </a></li>
-              <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/manage/contracts"><i class="glyphicon glyphicon-list-alt"></i>
+              <li><a class="list-group-item" id="settings-tab" href="<?php echo base_url();?>ucp/pending">
+                <i class="fa fa-list-alt"></i> Pending Approval</a></li>
+              <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/properties"><i class="glyphicon glyphicon-list-alt"></i>
             Properties </a></li>
-                <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/manage/events"><i class="fa fa-users"></i>
-              Events</a></li>
                           <li><a class="list-group-item" id="courses-tab" href="<?php echo base_url();?>ucp/manage/users"><i class="fa fa-user"></i>
           Manage Users</a></li>
             <li><a class="list-group-item" id="add-tab" href="#"><i class="fa fa-bell">
-            </i>News Items</a></li>
-            <li><a class="list-group-item" id="settings-tab" href="<?php echo base_url();?>ucp/manage/bids">
-              <i class="fa fa-list-alt"></i> Pending Approval</a></li>
-                <li><a class="list-group-item" id="portal-tab" ><i class="fa fa-money"></i>
-                  Payments</a></li>
+            </i>News</a></li>
                   <li><a class="list-group-item" id="settings-tab" >
                     <i class="fa fa-cogs"></i> Settings</a></li>
 

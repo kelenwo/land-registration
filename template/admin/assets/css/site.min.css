@@ -1363,7 +1363,7 @@ ul {
 }
 .btn {
   display: inline-block;
-  padding: 6px 20px 6px 20px;
+  padding: 6px 10px 6px 10px;
   margin-bottom: 0;
   font-size: 14px;
   font-family: inherit;
@@ -1380,7 +1380,6 @@ ul {
           user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 70px;
 }
 .btn:focus,
 .btn:active:focus,

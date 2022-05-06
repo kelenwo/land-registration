@@ -20,7 +20,7 @@
   <div class="">
  <div class="tab-contents">
   <ul id="myTab1" class="nav nav-tabs nav-justified">
- <li class="active"><a class="" href="#tab1" data-toggle="tab">Approved Properties</a></li>
+ <li class="active"><a class="" href="#tab1" data-toggle="tab">All Properties</a></li>
    </ul>
   <div id="myTabContent" class="tab-content">
 
@@ -49,7 +49,7 @@
   <td> <a href="#viewcontract-<?php echo $req['id'];?>" data-toggle="modal"><?php echo $req['title']; ?></a></td>
   <td><?php echo $req['location']; ?></td>
   <td><?php echo $req['price']; ?></td>
-  <td><?php echo $req['auth']; ?></td>
+  <td><?php echo $req['status']; ?></td>
   <td><?php echo $req['date']; ?></td>
 </tr>
 <!-- List contract modal -->

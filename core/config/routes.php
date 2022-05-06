@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['(:any)'] = 'home/$1/$2/$3';
 $route['dashboard'] = 'dashboard/index';
+$route['ucp/(:any)'] = 'ucp/manage/$1/$2';
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

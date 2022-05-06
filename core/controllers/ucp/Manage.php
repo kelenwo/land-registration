@@ -26,36 +26,36 @@ $this->parser->parse('admin/head',$data);
 $this->parser->parse('admin/index',$data);
         }
 
-public function approved_contracts() {
+public function approved_properties() {
 $data = $this->session->userdata();
-$arr = $this->contract_model->get_contracts_approved();
+$arr = $this->property_model->get_properties_approved();
 $i=0;
 foreach($arr as $val) {
-  $usr = $this->user_model->get_userdata($val['bid_by_email']);
+  $usr = $this->user_model->get_userdata($val['author_email']);
   array_push($arr[$i],$usr[0]);
   $i++;
 }
 //var_dump($arr);
 $data['bids'] = $arr;
-$data['title'] = "Admin Panel - Approved Contracts";
+$data['title'] = "Admin Panel - Approved Properties";
 $this->parser->parse('admin/head',$data);
 $this->parser->parse('admin/approved_contracts',$data);
 }
 
-public function bids() {
+public function pending() {
   $data = $this->session->userdata();
-$data['bids'] = $this->contract_model->get_bids();
+$data['bids'] = $this->property_model->get_properties_pending();
 $data['title'] = "Admin Panel - bids";
 $this->parser->parse('admin/head',$data);
-$this->parser->parse('admin/bids',$data);
+$this->parser->parse('admin/pending',$data);
 }
 
-public function contracts() {
+public function properties() {
   $data = $this->session->userdata();
-  $data['contract'] = $this->contract_model->get_contracts();
+$data['bids'] = $this->property_model->get_properties_approved();
 $data['title'] = "Admin Panel - Articles";
 $this->parser->parse('admin/head',$data);
-$this->parser->parse('admin/contracts',$data);
+$this->parser->parse('admin/properties',$data);
 }
 
 
