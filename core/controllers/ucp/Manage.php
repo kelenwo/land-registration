@@ -114,12 +114,12 @@ echo 'saved';
 echo 'fail';}
 }
 
-public function update_contract() {
-$contract = $this->contract_model->update_contract();
-if($contract==true) {
+public function approve_property() {
+$status = $this->property_model->update_property();
+if($status==true) {
 echo 'true';
 } else {
-echo $contract;}
+echo $status;}
 }
 
 public function update_contract_bid() {

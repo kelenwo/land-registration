@@ -21,9 +21,9 @@ Class Property_model Extends CI_model {
   return $this->db->count_all_results();
   }
 
-  public function update_contract() {
+  public function update_property() {
     $this->db->where('id',$this->input->post('id'));
-    $query = $this->db->update('contract_bidding', $this->input->post());
+    $query = $this->db->update('for_sell', $this->input->post());
     if($query) {
       return true;
     } else {

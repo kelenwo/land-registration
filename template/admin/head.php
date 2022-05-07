@@ -65,7 +65,7 @@
         </div><!-- /.container-fluid -->
       </nav>
     <!--header-->
-    <div class="container-fluid" style="margin-left:3% !important">
+    <div class="container-fluid" style="margin-left:2% !important">
     <!--documents-->
         <div class="row row-offcanvas row-offcanvas-left">
           <div class="col-xs-6 col-sm-4 sidebar-offcanvas" role="navigation">

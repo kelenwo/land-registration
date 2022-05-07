@@ -56,7 +56,7 @@
     <a id="del-user-<?php echo $req['id'];?>"><b style="color:red;">Delete&nbsp;<i class="fas fa-trash-alt"></i></a></b>
     <form id="del_users-<?php echo $req['id'];?>">
     <input type="hidden" name="id" value="<?php echo $req['id'];?>">
-    <input type="hidden" name="type" value="users">
+    <input type="hidden" name="type" value="property">
   </form>
   </td>
 </tr>
@@ -117,14 +117,18 @@
 <!-- General Information end -->
 
     </div>
-
+    <form id="approve_property-<?php echo $req['id'];?>">
+    <input type="hidden" name="id" value="<?php echo $req['id'];?>">
+    <input type="hidden" name="auth" value="approved">
+    <input type="hidden" name="status" value="active">
+  </form>
       <div class="modal-footer mt-2">
         <span style="color:green;" id="msg-<?php echo $req['id'];?>"></span>
         <span style="color:red;" id="msg2-<?php echo $req['id'];?>"></span>
         <div class="form-group text-center mt-5">
           <a href="" class="btn pl-3 pr-3 btn-info" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i> &nbsp;View Full Details</a>
           <?php if($req['auth']=="pending"): ?>
-    <button class="btn pl-3 pr-3 btn-success" id="save-<?php echo $req['id'];?>" <?php if($req['auth']=="approved"){echo 'disabled';}?>><i class="far fa-edit"></i> Approve &nbsp;
+    <button class="btn pl-3 pr-3 btn-success" id="approve-<?php echo $req['id'];?>" <?php if($req['auth']=="approved"){echo 'disabled';}?>><i class="far fa-edit"></i> Approve &nbsp;
     <i id="loading-<?php echo $req['id'];?>" class="fas fa-cog fa-spin"></i></button>
     <?php endif;?>
           <button class="btn pl-3 pr-3 btn-info" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i> &nbsp;Close</button>
@@ -143,7 +147,7 @@ $("#loading1-<?php echo $req['id'];?>").hide();
 //delete contract
 $('#loadingcontract-<?php echo $req["id"];?>').hide();
 $("#del-contract-<?php echo $req['id'];?>").click(function(){
-  if (confirm("Do you want to delete?")){
+  if (confirm("Are you sure you want to delete this listing? it can not be recovered!!")){
     $.ajax({
       url:'<?php echo base_url()."ucp/manage/delete_item";?>',
       type: "POST",
@@ -161,69 +165,26 @@ window.location.href = "<?php echo $_SERVER['PHP_SELF'];?>";
   }
 });
 //Save contract edit
-$("#save-<?php echo $req['id'];?>").click(function() {
+$("#approve-<?php echo $req['id'];?>").click(function() {
 $("#loading-<?php echo $req['id'];?>").show();
 $.ajax({
-  url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
+  url:'<?php echo base_url()."ucp/manage/approve_pending_property";?>',
   type: "POST",
-  data: $("#update_contract-<?php echo $req['id'];?>").serialize(),
+  data: $("#approve_property-<?php echo $req['id'];?>").serialize(),
   success:function(data) {
 $('#msg2-<?php echo $req["id"];?>').html('');
 $('#msg-<?php echo $req["id"];?>').html('');
 $("#loading-<?php echo $req['id'];?>").hide();
   if(data=="true") {
-alert('Contract has been Approved successfully');
+alert('Listed Property has been Approved successfully');
 window.location.href = "<?php echo $_SERVER['PHP_SELF'];?>";
-$("#save-<?php echo $req['id'];?>").attr('disabled','disabled');
+$("#approve-<?php echo $req['id'];?>").attr('disabled','disabled');
   } else {
 $('#msg2-<?php echo $req["id"];?>').html(data);
   }
   }
 });
 });
-
-//Save contract edit
-$("#save--<?php echo $req['id'];?>").click(function() {
-$("#loading--<?php echo $req['id'];?>").show();
-$.ajax({
-  url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
-  type: "POST",
-  data: $("#update__contract_<?php echo $req['id'];?>").serialize(),
-  success:function(data) {
-$('#msg2-<?php echo $req["id"];?>').html('');
-$('#msg-<?php echo $req["id"];?>').html('');
-$("#loading--<?php echo $req['id'];?>").hide();
-  if(data=="true") {
-alert('Contract has been Completed');
-$("#save--<?php echo $req['id'];?>").attr('disabled','disabled');
-  } else {
-$('#msg2-<?php echo $req["id"];?>').html(data);
-  }
-  }
-});
-});
-
-$("#save1-<?php echo $req['id'];?>").click(function() {
-$("#loading1-<?php echo $req['id'];?>").show();
-$.ajax({
-  url:'<?php echo base_url()."ucp/manage/update_contract_bid";?>',
-  type: "POST",
-  data: $("#update_contract-<?php echo $req['id'];?>").serialize(),
-  success:function(data) {
-$('#msg2-<?php echo $req["id"];?>').html('');
-$('#msg-<?php echo $req["id"];?>').html('');
-$("#loading1-<?php echo $req['id'];?>").hide();
-  if(data=="true") {
-alert('Contract has been Approved successfully');
-window.location.href = "<?php echo $_SERVER['PHP_SELF'];?>";
-$("#save1-<?php echo $req['id'];?>").attr('disabled','disabled');
-  } else {
-$('#msg2-<?php echo $req["id"];?>').html(data);
-  }
-  }
-});
-});
-
 
 
 //Save contract edit
