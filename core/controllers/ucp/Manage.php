@@ -117,9 +117,20 @@ echo 'fail';}
 public function approve_property() {
 $status = $this->property_model->update_property();
 if($status==true) {
+$this->email->from('no-reply@eland.com','eLand');
+$this->email->to($this->input->post('author_email'));
+$this->email->subject('eLand - Property Approved');
+$this->email->message('Your property listing has been Approved!, Kindly Continue to your dashboard to confirm.');
+$send = $this->email->send();
+if($send) {
 echo 'true';
 } else {
-echo $status;}
+show_error($this->email->print_debugger());
+   return false;
+}
+} else {
+echo $status;
+}
 }
 
 public function update_contract_bid() {
